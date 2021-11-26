@@ -22,11 +22,12 @@ function escapePopup(popupsArray) {
         closeModal(evt.target.closest(".modal"));
       }
   
-      document.onmouseover = function (event) {
-        let target = event.target;
-        if (!event.target.classList.contains("modal")) {
-          target.style.cursor = "pointer";
-        }
-      };
+      //for future modification, not working properly
+      // document.onmouseover = function (event) {
+      //   let target = event.target;
+      //   if (!event.target.classList.contains("modal")) {
+      //     target.style.cursor = "pointer";
+      //   }
+      // };
     })
   );
