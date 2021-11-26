@@ -2,9 +2,9 @@
 ### *by Sara Weissman, 2021*
 
 ## Project Description:
-This is a continuation of project 4 and 5
-Main Focus of the project: form validation
-also added: overlay and escape clicks for closing modal
+-This is a continuation of project 4 and 5
+-Main Focus of the project: form validation
+-also added: overlay and escape clicks for closing modal
 
 ### Github-pages project:
 
