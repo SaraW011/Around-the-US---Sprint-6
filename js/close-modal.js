@@ -43,10 +43,10 @@ const modalsOverlayClickOut = document.querySelectorAll(".modal");
 // modalsOverlayClickOut.forEach((popup) =>  
 
   if (popup) {
-    popup.removeEventListener("click", modalsOverlayClickOut);
-    popup.removeEventListener("keydown", closePopupWithEscape);
-  } else {
     popup.addEventListener("click", modalsOverlayClickOut); 
     popup.addEventListener("keydown", closePopupWithEscape);
+  } else {
+    popup.removeEventListener("click", modalsOverlayClickOut);
+    popup.removeEventListener("keydown", closePopupWithEscape);
   }
 }
