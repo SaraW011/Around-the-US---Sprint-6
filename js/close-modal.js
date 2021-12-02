@@ -24,18 +24,18 @@ function clickOutOverlay(event) {
   }
 }
 
-// document.addEventListener("keydown", closePopupWithEscape); // can we attach to modal not whole document?
-// document.addEventListener("click", clickOutOverlay)
+document.addEventListener("keydown", closePopupWithEscape); // can we attach to modal not whole document?
+document.addEventListener("click", clickOutOverlay)
 
-function evtListeners(modal) {
-  modal.classList.toggle("modal_open");
+// function evtListeners(modal) {
+//   modal.classList.toggle("modal_open");
 
-  if (modal) {
-    document.addEventListener("keydown", closePopupWithEscape);
-    document.addEventListener("click", clickOutOverlay);
-  } else {
-    document.removeEventListener("keydown", closePopupWithEscape);
-    document.removeEventListener("click", clickOutOverlay)
-  }
-  evtListeners();
-}
+//   if (modal) {
+//     document.addEventListener("keydown", closePopupWithEscape);
+//     document.addEventListener("click", clickOutOverlay);
+//   } else {
+//     document.removeEventListener("keydown", closePopupWithEscape);
+//     document.removeEventListener("click", clickOutOverlay)
+//   }
+//   evtListeners();
+// }
