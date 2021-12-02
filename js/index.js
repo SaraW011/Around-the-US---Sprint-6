@@ -57,7 +57,7 @@ function createPlaceElement(data) {
   place.querySelector(".elements__image").style.backgroundImage = `url(${data.link})`;
 
   place.querySelector(".elements__heart").addEventListener("click", (evt) => {
-    evt.target.classList.add("elements__heart_active");
+    evt.target.classList.toggle("elements__heart_active");
   });
 
   place.querySelector(".elements__trash").addEventListener("click", () => {
@@ -89,7 +89,7 @@ function submitNewPlaceForm(e) {
   });
 
   placeList.prepend(insertPlace);
-
+  form.reset()
   closeModal(addNewPlacePopup);
 }
 
