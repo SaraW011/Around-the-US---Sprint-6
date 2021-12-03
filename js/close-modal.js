@@ -1,41 +1,40 @@
 // Selecting the popup array to close with Esc
-function closePopup(popupsArray) {
-  popupsArray.forEach((popup) => closeModal(popup)); // why do I need this? why prev. closeModal not working?
-}
+// function closePopup(popupsArray) {
+//   popupsArray.forEach((popup) => closeModal(popup));   // previous function replaced by closeModal, line 10
+// }
 
 // Closing the Popup by Pressing Esc
-function closePopupWithEscape(evt) {
-  const key = evt.key;
+function closePopupWithEscape(event) {
+  const key = event.key;
   if (key == "Escape") {
-    closePopup([...document.querySelectorAll(".modal")]);
+    closeModal(document.querySelector(".modal_open"));
+    // closePopup([...document.querySelectorAll(".modal")]);
     console.log("you escaped");
   }
 }
 
 //Closing the Popup by Clicking on the Overlay
-
-function clickOutOverlay(event) {
+function modalOverlayClickOut(event) {
   if (
     event.target.classList.contains("modal_open") ||
     event.target.classList.contains(`modal__image-wrapper`)
   ) {
-    closeModal(event.target.closest(".modal"));
+    closeModal(event.target);
     console.log("overlay closed");
   }
 }
 
-document.addEventListener("keydown", closePopupWithEscape); // can we attach to modal not whole document?
-document.addEventListener("click", clickOutOverlay)
+//-->> open + close modals + remove event listeners:
+const profilePopup = document.querySelector(".modal");
 
-// function evtListeners(modal) {
-//   modal.classList.toggle("modal_open");
+function openModal(popup) {
+  popup.classList.add("modal_open");
+  document.addEventListener("keydown", closePopupWithEscape);
+  document.addEventListener("click", modalOverlayClickOut);
+}
 
-//   if (modal) {
-//     document.addEventListener("keydown", closePopupWithEscape);
-//     document.addEventListener("click", clickOutOverlay);
-//   } else {
-//     document.removeEventListener("keydown", closePopupWithEscape);
-//     document.removeEventListener("click", clickOutOverlay)
-//   }
-//   evtListeners();
-// }
+function closeModal(popup) {
+  popup.classList.remove("modal_open");
+  document.removeEventListener("keydown", closePopupWithEscape);
+  document.removeEventListener("click", modalOverlayClickOut);
+}

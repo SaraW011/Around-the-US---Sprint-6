@@ -20,44 +20,25 @@ const inputLink = addNewPlacePopup.querySelector(".form__input_type_link");
 
 // buttons
 const openProfileEditButton = document.querySelector(".profile__edit-button");
-//const closeModalButton = document.querySelector(".modal__close-button"); //no need
 const addNewPlacePopupButton = document.querySelector(".profile__add-button");
 const createPlace = addNewPlacePopup.querySelector(".form__button");
 
 //place=elements template
-const placeList = document.querySelector(".elements__list"); //places all cards inside this UL
-const placeTemplate = document.querySelector(".elements-template").content.querySelector(".elements__element");
-
-
-//**-->>OPEN AND CLOSE MODALS <<--**
-
-//-->> open + close modals:
-const profilePopup = document.querySelector('.modal'); 
-
-function openModal(popup) {              
-  popup.classList.add("modal_open");    
-}
-
-function closeModal(popup) {
-  popup.classList.remove("modal_open");
-}
-
-//-->> prev close modal with submit:
-// function closeBtn() {
-//   editProfilePopup.classList.remove("modal_open");
-//   addNewPlacePopup.classList.remove("modal_open");
-// }
+const placesList = document.querySelector(".elements__list"); //places all cards inside this UL
+const placeTemplate = document
+  .querySelector(".elements-template")
+  .content.querySelector(".elements__element");
 
 //**-->>CPLACE CARD ELEMENTS <<--**
 
-function createPlaceElement(data) {
+function insertedCard(data) {
   // data is object of {name, link}
   const place = placeTemplate.cloneNode(true);
   place.querySelector(".elements__text").textContent = data.name;
   place.querySelector(".elements__image").style.backgroundImage = `url(${data.link})`;
 
-  place.querySelector(".elements__heart").addEventListener("click", (evt) => {
-    evt.target.classList.toggle("elements__heart_active");
+  place.querySelector(".elements__heart").addEventListener("click", (event) => {
+    event.target.classList.toggle("elements__heart_active");
   });
 
   place.querySelector(".elements__trash").addEventListener("click", () => {
@@ -66,10 +47,9 @@ function createPlaceElement(data) {
 
   place.querySelector(".elements__image").addEventListener("click", () => {
     openProfileModal(previewImage);
-    previewImage.querySelector(".modal__image-caption").textContent =
-      data.name;
-    previewImage.querySelector(".modal__image-container").src =
-      data.link;
+    previewImage.querySelector(".modal__image-caption").textContent = data.name;
+    previewImage.querySelector(".modal__image-container").src = data.link;
+    previewImage.querySelector(".modal__image-container").alt = data.name;
   });
 
   return place;
@@ -77,26 +57,26 @@ function createPlaceElement(data) {
 
 //  import to doc initialCards from .js:
 initialCards.reverse().forEach((initialCardData) => {
-  placeList.prepend(createPlaceElement(initialCardData));
+  placesList.prepend(insertedCard(initialCardData));
 });
 
 // add new place card:
 function submitNewPlaceForm(e) {
   e.preventDefault(); // prevent browser refresh after form submition:
-  const insertPlace = createPlaceElement({
+  const insertPlace = insertedCard({
     name: inputPlace.value,
     link: inputLink.value,
   });
 
-  placeList.prepend(insertPlace);
-  form.reset()
+  placesList.prepend(insertPlace);
+ 
   closeModal(addNewPlacePopup);
 }
 
 //**-->>PROFILE FORM <<--**
 
 //allows editing form:
-function openProfileModal(editProfilePopup) { 
+function openProfileModal(editProfilePopup) {
   const userName = userNameElement.textContent;
   const userJob = userJobElement.textContent;
 
@@ -104,8 +84,10 @@ function openProfileModal(editProfilePopup) {
   inputName.value = userName;
   inputJob.value = userJob;
 
-  openModal(editProfilePopup);
+  inputName.value = "";
+  inputJob.value = "";
 
+  openModal(editProfilePopup);
 }
 
 // insert new name into profile:
@@ -122,22 +104,23 @@ function submitProfileForm(e) {
   closeModal(editProfilePopup);
 }
 
-
 // close ALL modals with x button:
-const closeAllBtns = document.querySelectorAll('.modal__close-button');
-closeAllBtns.forEach(btn => btn.addEventListener('click', (evt) => {
-  closeModal(evt.target.closest('.modal'))
-}));
+const closeButtons = document.querySelectorAll(".modal__close-button");
+closeButtons.forEach((button) =>
+  button.addEventListener("click", (event) => {
+    closeModal(event.target.closest(".modal"));
+  })
+);
 
-//*****---->>> EVT LISTENERS <<----*****
+//*****---->>> EVENT LISTENERS <<----*****
 
 profileForm.addEventListener("submit", submitProfileForm);
 
 openProfileEditButton.addEventListener("click", () =>
-openProfileModal(editProfilePopup)
+  openProfileModal(editProfilePopup)
 );
 addNewPlacePopupButton.addEventListener("click", () =>
-openProfileModal(addNewPlacePopup)
+  openProfileModal(addNewPlacePopup)
 );
 
 placeForm.addEventListener("submit", submitNewPlaceForm);
