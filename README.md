@@ -10,7 +10,7 @@ This is a continuation of project 4 and 5
 
 [Link to Github folder](https://github.com/SaraW011/Yandex-Practicum-Around-the-US-Project-6)
 
-[Link to live page](https://saraw011.github.io/Yandex-Practicum-Around-the-US-Project-6/)
+[Link to live page](https://saraw011.github.io/Around-the-US---Sprint-6/)
 
 Tools Used:
 * Figma
